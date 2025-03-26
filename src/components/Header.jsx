@@ -39,7 +39,11 @@ const Header = () => {
               <option value="" disabled selected hidden>Select Property Type</option>
               <option>Rentals</option>
               <option>PG</option>
-              <option>1BHK</option>
+              <option>Single Room</option>
+              <option>1 BHK</option>
+              <option>2 BHK</option>
+              <option>3 BHK</option>
+
             </select>
           </div>
 
@@ -49,8 +53,11 @@ const Header = () => {
             <select className="w-full p-2 border-b border-gray-400 outline-none focus:border-black bg-white text-gray-800">
               <option value="" disabled selected hidden>Select Category</option>
               <option>Apartment</option>
+              <option>Flats</option>
               <option>PG</option>
               <option>Shared Rooms</option>
+              <option>Offices</option>
+
             </select>
           </div>
 
