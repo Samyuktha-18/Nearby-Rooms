@@ -15,9 +15,16 @@ const Navbar = () => {
             <a href="#Contact" className='cursor-pointer hover:text-gray-400'>Contact</a>
         </ul>
 
-        <div className='hidden md:flex space-x-4 ml-auto'>
-          <button className='bg-white text-black px-6 py-2 rounded-full'>Download</button>
-          <button className='bg-white text-black px-6 py-2 rounded-full'>Signup</button>
+        <div className='hidden md:flex space-x-4 ml-auto cursor-pointer'>
+        <a 
+            href="https://play.google.com/store/apps/details?id=com.darth.nearbyroom" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className='bg-white text-black px-6 py-2 rounded-full'
+          >
+            Download
+          </a>
+          <a href="/signup" className='bg-white text-black px-6 py-2 rounded-full'>Signup</a>
         </div>
         
       </div>
