@@ -25,9 +25,16 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <div className="py-6 bg-gray-100 text-center min-h-screen px-6 md:px-16 lg:px-32 font-['Outfit']">
-      <h2 className="text-4xl  text-gray-800 mb-8">Why Choose Us</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="flex flex-col items-center justify-center container mx-auto px-6 py-10 md:px-12 lg:px-24 w-full overflow-hidden" id="About">
+      <h1 className="text-2xl sm:text-4xl font-bold mb-4 text-center">
+        Why 
+        <span className="underline underline-offset-4 decoration-2 font-light pl-2">Choose Us</span>
+      </h1>
+      <p className="text-gray-500 text-center max-w-2xl mb-12">
+        Passionate about properties, dedicated to your vision..
+      </p>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {features.map((feature, index) => (
           <div 
             key={index} 

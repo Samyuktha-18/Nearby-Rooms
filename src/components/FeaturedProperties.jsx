@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import project1Image from '../assets/project1.jpg';
 import project2Image from '../assets/project2.jpg';
 import project3Image from '../assets/project3.jpg';
@@ -7,12 +7,15 @@ import project5Image from '../assets/project5.jpg';
 import project6Image from '../assets/project6.jpg';
 import project7Image from '../assets/project7.jpg';
 import project8Image from '../assets/project8.jpg';
-
+import left_arrow from '../assets/left_arrow.svg'
+import right_arrow from '../assets/right_arrow.svg'
 
 const FeaturedProperties = () => {
+  const [properties, setProperties] = useState([]);
   const scrollContainerRef = useRef(null);
-  
-  const properties = [
+
+  // Sample data - This could be fetched from an API
+  const initialProperties = [
     {
       id: 1,
       title: "Luxury Studio in Kharadi",
@@ -31,6 +34,7 @@ const FeaturedProperties = () => {
       amenities: ["Parking", "Security", "Lift"],
       link: "#"
     },
+    
     {
       id: 4,
       title: "Cozy Studio in Viman Nagar",
@@ -59,21 +63,21 @@ const FeaturedProperties = () => {
       link: "#"
     },
     {
-      id: 3,
-      title: "Spacious Shared Apartment in Kothrud",
-      price: "₹15,000/month",
-      location: "Kothrud",
-      image: project3Image,
-      amenities: ["Balcony", "Housekeeping", "Laundry"],
-      link: "#"
-    },
-    {
       id: 7,
       title: "1BHK & office in Baner",
       price: "₹50,000/month",
       location: "Baner",
       image: project7Image,
       amenities: ["Parking", "Gym", "Swimming Pool"],
+      link: "#"
+    },
+    {
+      id: 3,
+      title: "Spacious Shared Apartment in Kothrud",
+      price: "₹15,000/month",
+      location: "Kothrud",
+      image: project3Image,
+      amenities: ["Balcony", "Housekeeping", "Laundry"],
       link: "#"
     },
     {
@@ -87,6 +91,11 @@ const FeaturedProperties = () => {
     }
   ];
 
+  // useEffect to set properties when component mounts (could be fetched from an API)
+  useEffect(() => {
+    setProperties(initialProperties);
+  }, []);
+
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
       const scrollAmount = 200; // Adjust scroll amount as needed
@@ -98,62 +107,58 @@ const FeaturedProperties = () => {
   };
 
   return (
-    <section className="bg-gray-100 py-4">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold text-gray-800">Featured Properties</h2>
-          <div className="flex items-center">
+    <section className="bg-white py-4">
+      <div className="container mx-auto px-6">
+        <div className="container mx-auto py-4 pt-20 px-6 md:px-20 lg:px-32 my-2 w-full overflow-hidden" id="Projects">
+          <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center">
+            Featured 
+            <span className="underline underline-offset-4 decoration-1 under font-light pl-2">
+              Properties
+            </span>
+          </h1>
+          <p className="text-center text-gray-500 mb-8 max-w-80 mx-auto">
+            Crafting Spaces, Building legacies - Explore Our Portfolio
+          </p>
+
+          {/* Slider Buttons */}
+          <div className="flex justify-end items-center mb-0">
             <button 
               onClick={() => scroll('left')} 
-              className="bg-gray-200 hover:bg-gray-300 rounded-full p-2 mr-2 focus:outline-none"
-              aria-label="Scroll left"
+              className="p-3 bg-gray-200 rounded mr-2" 
+              aria-label="Previous Project"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
+              <img src={left_arrow} alt="previous" />
             </button>
+
             <button 
               onClick={() => scroll('right')} 
-              className="bg-gray-200 hover:bg-gray-300 rounded-full p-2 mr-4 focus:outline-none"
-              aria-label="Scroll right"
+              className="p-3 bg-gray-200 rounded mr-2" 
+              aria-label="Next Project"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-              </svg>
+              <img src={right_arrow} alt="next" />
             </button>
-            {/* <a href="#" className="text-blue-500 flex items-center">
-              View All Properties 
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </a> */}
           </div>
+
         </div>
-        
+
         {/* Scrollable container with hidden scrollbar */}
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto pb-4 scrollbar-hide"
+          className="flex overflow-x-auto pb-4 scrollbar-hide justify-center gap-6"
           style={{ 
             scrollbarWidth: 'none', // Firefox
             msOverflowStyle: 'none', // IE/Edge
             WebkitOverflowScrolling: 'touch' // Smooth scrolling on iOS
           }}
         >
-          {/* Custom style to hide scrollbar for Webkit browsers */}
-          <style jsx>{`
-            .scrollbar-hide::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-          
+
+          {/* Displaying all properties */}
           {properties.map((property) => (
             <div 
               key={property.id} 
-              className="flex-shrink-0 w-64 sm:w-72 mr-4 bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200"
+              className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200"
             >
               <img src={property.image} alt={property.title} className="w-full h-48 object-cover" />
-              
               <div className="p-4">
                 <h3 className="text-lg font-bold text-gray-800 mb-2">{property.title}</h3>
                 <div className="flex justify-between items-center mb-3">
@@ -162,7 +167,6 @@ const FeaturedProperties = () => {
                     {property.location}
                   </span>
                 </div>
-                
                 <div className="flex flex-wrap gap-2 mb-3">
                   {property.amenities.map((amenity, index) => (
                     <span key={index} className="text-gray-600 bg-gray-100 px-3 py-1 text-xs rounded-full">
@@ -170,7 +174,6 @@ const FeaturedProperties = () => {
                     </span>
                   ))}
                 </div>
-                
                 <a 
                   href={property.link} 
                   className="block w-full text-center bg-blue-500 hover:bg-blue-600 text-white py-2 rounded transition-colors"
@@ -181,17 +184,9 @@ const FeaturedProperties = () => {
             </div>
           ))}
         </div>
-      </div>
-      
-      <a href="#" className="flex items-center justify-center text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500 py-2 px-2 rounded-full transition-all duration-300">
-  View All Properties
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-  </svg>
-</a>
 
+      </div>
     </section>
-    
   );
 };
 
