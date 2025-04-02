@@ -163,7 +163,7 @@ const FeaturedProperties = () => {
                 <h3 className="text-lg font-bold text-gray-800 mb-2">{property.title}</h3>
                 <div className="flex justify-between items-center mb-3">
                   <span className="text-blue-600 font-medium">{property.price}</span>
-                  <span className="bg-yellow-400 text-white px-3 py-1 rounded-full text-xs flex items-center">
+                  <span className="bg-[#FF5733] text-white px-3 py-1 rounded-full text-xs flex items-center">
                     {property.location}
                   </span>
                 </div>
@@ -176,7 +176,7 @@ const FeaturedProperties = () => {
                 </div>
                 <a 
                   href={property.link} 
-                  className="block w-full text-center bg-blue-500 hover:bg-blue-600 text-white py-2 rounded transition-colors"
+                  className="block w-full text-center bg-[#364a75] hover:bg-[#111827] text-white py-2 rounded transition-colors"
                 >
                   View Details
                 </a>
