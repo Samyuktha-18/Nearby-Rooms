@@ -5,15 +5,15 @@ const ContactFooter = () => {
   return (
     <div className="relative">
       {/* Contact Section */}
-      <div className="relative bg-[#fdf2ec] text-black p-20 rounded-lg max-w-6xl mx-auto -mb-20 z-10 shadow-lg">
-        <h2 className="text-5xl font-bold">
+      <div className="relative bg-[#fdf2ec] text-black p-16 rounded-lg max-w-6xl mx-auto -mb-16 z-10 shadow-lg">
+        <h2 className="text-4xl font-bold">
           Find your <span className="text-orange-500">dream home</span> today!
         </h2>
-        <p className="mt-6 text-2xl">
+        <p className="mt-4 text-xl">
           Discover the perfect property tailored to your needs and preferences with our expert guidance.
         </p>
-        <button className="mt-8 border border-black px-10 py-4 text-xl rounded-lg flex items-center gap-2 hover:bg-black hover:text-white transition">
-          Contact US <span className="text-3xl">↗</span>
+        <button className="cursor-pointer mt-6 border border-black px-8 py-3 text-lg rounded-lg flex items-center gap-2 hover:bg-black hover:text-white transition">
+          Contact US <span className="text-2xl">↗</span>
         </button>
       </div>
 
@@ -33,21 +33,20 @@ const ContactFooter = () => {
                 placeholder="Email"
                 className="p-3 w-64 bg-gray-800 border border-gray-700 text-white rounded-l-md focus:outline-none text-lg"
               />
-              <button className="p-3 bg-orange-500 text-white rounded-r-md text-lg">Subscribe</button>
+              <button className="p-3 bg-orange-500 text-white rounded-r-md text-lg cursor-pointer">Subscribe</button>
             </div>
           </div>
 
           {/* Links */}
           <div>
             <h4 className="text-2xl font-semibold text-orange-500">Links</h4>
-            <ul className="mt-6 space-y-4 text-lg">
-           <li><a href="#Header" className='cursor-pointer hover:text-gray-400'>Home</a></li>
-           <li><a href="#About" className='cursor-pointer hover:text-gray-400'>About</a></li>
-           <li><a href="#Projects" className='cursor-pointer hover:text-gray-400'>Projects</a></li>
-           <li><a href="#Testimonials" className='cursor-pointer hover:text-gray-400'>Testimonials</a></li>
-           <li><a href="#Contact" className='cursor-pointer hover:text-gray-400'>Contact</a></li>
+            <ul className="mt-6 space-y-4 text-lg cursor-pointer">
+              <li><a href="#Header" className='cursor-pointer hover:text-gray-400'>Home</a></li>
+              <li><a href="#About" className='cursor-pointer hover:text-gray-400'>About</a></li>
+              <li><a href="#Projects" className='cursor-pointer hover:text-gray-400'>Projects</a></li>
+              <li><a href="#Testimonials" className='cursor-pointer hover:text-gray-400'>Testimonials</a></li>
+              <li><a href="#Contact" className='cursor-pointer hover:text-gray-400'>Contact</a></li>
             </ul>
-
           </div>
 
           {/* Contact Info */}
