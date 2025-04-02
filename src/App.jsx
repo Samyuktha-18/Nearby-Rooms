@@ -11,8 +11,10 @@ const App = () => {
     <div className='w-full overflow-hidden'>
       <Header/>
       <WhyChooseUs/>
-      <FeaturedProperties/>
-      <CTABanner/>
+      <div className="relative">
+      <FeaturedProperties />
+      <CTABanner />
+    </div>
       <AboutSection/>
       <ContactFooter/>
     </div>
