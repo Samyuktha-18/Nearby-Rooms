@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 
 const Header = () => {
@@ -10,18 +11,38 @@ const Header = () => {
     >
       <Navbar />
 
-      <div className="container mx-auto text-white text-center py-4 px-6 md:px-20 lg:px-22 text-white mt-25 mb-40">
-        <h2 className="text-5xl sm:text-6xl md:text-[82px] inline-block max-w-3xl font-semibold pt-20">
+      <div className="container mx-auto text-white text-center py-4 px-6 md:px-20 lg:px-22 mt-25 mb-40">
+
+        {/* Heading */}
+        <motion.h2 
+          className="text-5xl sm:text-6xl md:text-[82px] inline-block max-w-3xl font-semibold pt-20"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5 }}
+        >
           Find Your Perfect Living Space
-        </h2>
-        <div className="mt-5">
+        </motion.h2>
+
+        {/* Subheading */}
+        <motion.div
+          className="mt-5"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+        >
           <h3 className="text-sm sm:text-lg md:text-2xl inline-block max-w-3xl">
             Discover verified rooms, apartments, and shared spaces across Pune
           </h3>
-        </div>
+        </motion.div>
 
         {/* Search Form */}
-        <div className="mt-8 bg-white p-2 md:p-6 rounded shadow flex flex-col md:flex-row gap-3 items-center mr-10">
+        <motion.div 
+          className="mt-8 bg-white p-2 md:p-6 rounded shadow flex flex-col md:flex-row gap-3 items-center mr-10"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 2.5, duration: 0.8 }}
+        >
+
           {/* Location Input */}
           <div className="flex-1">
             <label className="block text-gray-700 font-medium">LOCATION</label>
@@ -43,7 +64,6 @@ const Header = () => {
               <option>1 BHK</option>
               <option>2 BHK</option>
               <option>3 BHK</option>
-
             </select>
           </div>
 
@@ -57,7 +77,6 @@ const Header = () => {
               <option>PG</option>
               <option>Shared Rooms</option>
               <option>Offices</option>
-
             </select>
           </div>
 
@@ -65,7 +84,7 @@ const Header = () => {
           <button className="bg-red-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-red-700 transition">
             SUBMIT
           </button>
-        </div>
+        </motion.div>
 
       </div>
     </div>
