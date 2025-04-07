@@ -5,6 +5,8 @@ import FeaturedProperties from './components/FeaturedProperties'
 import CTABanner from './components/PropertiesBanner'
 import AboutSection from './components/About'
 import ContactFooter from './components/Footer'
+import DownloadAppBanner from './components/DownloadApp'
+import Testimonials from './components/Testimonials'
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
       <CTABanner />
     </div>
       <AboutSection/>
+      <DownloadAppBanner/>
+      <Testimonials/>
       <ContactFooter/>
     </div>
   )
