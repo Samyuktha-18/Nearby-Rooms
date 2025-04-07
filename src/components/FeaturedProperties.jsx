@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
+// Importing project images
 import project1Image from '../assets/project1.jpg';
 import project2Image from '../assets/project2.jpg';
 import project3Image from '../assets/project3.jpg';
@@ -7,176 +9,179 @@ import project5Image from '../assets/project5.jpg';
 import project6Image from '../assets/project6.jpg';
 import project7Image from '../assets/project7.jpg';
 import project8Image from '../assets/project8.jpg';
-import left_arrow from '../assets/left_arrow.svg'
-import right_arrow from '../assets/right_arrow.svg'
+
+import leftArrow from '../assets/left_arrow.svg';
+import rightArrow from '../assets/right_arrow.svg';
 
 const FeaturedProperties = () => {
   const [properties, setProperties] = useState([]);
-  const scrollContainerRef = useRef(null);
+  const scrollRef = useRef(null);
 
-  // Sample data - This could be fetched from an API
-  const initialProperties = [
+  const sampleProperties = [
     {
       id: 1,
-      title: "Luxury Studio in Kharadi",
-      price: "₹25,000/month",
-      location: "Kharadi",
+      title: 'Luxury Studio in Kharadi',
+      price: '₹25,000/month',
+      location: 'Kharadi',
       image: project1Image,
-      amenities: ["AC", "WiFi", "Fully Furnished"],
-      link: "#"
+      amenities: ['AC', 'WiFi', 'Fully Furnished'],
+      link: '#',
     },
     {
       id: 2,
-      title: "Modern 1BHK in Hinjewadi",
-      price: "₹35,000/month",
-      location: "Hinjewadi",
+      title: 'Modern 1BHK in Hinjewadi',
+      price: '₹35,000/month',
+      location: 'Hinjewadi',
       image: project2Image,
-      amenities: ["Parking", "Security", "Lift"],
-      link: "#"
-    },
-    
-    {
-      id: 4,
-      title: "Cozy Studio in Viman Nagar",
-      price: "₹22,000/month",
-      location: "Viman Nagar",
-      image: project4Image,
-      amenities: ["AC", "Furnished", "Power Backup"],
-      link: "#"
-    },
-    {
-      id: 5,
-      title: "2BHK in Baner",
-      price: "₹40,000/month",
-      location: "Baner",
-      image: project5Image,
-      amenities: ["Parking", "Gym", "Swimming Pool"],
-      link: "#"
-    },
-    {
-      id: 6,
-      title: "2BHK & office in Baner",
-      price: "₹60,000/month",
-      location: "Baner",
-      image: project6Image,
-      amenities: ["Parking", "Gym", "Swimming Pool"],
-      link: "#"
-    },
-    {
-      id: 7,
-      title: "1BHK & office in Baner",
-      price: "₹50,000/month",
-      location: "Baner",
-      image: project7Image,
-      amenities: ["Parking", "Gym", "Swimming Pool"],
-      link: "#"
+      amenities: ['Parking', 'Security', 'Lift'],
+      link: '#',
     },
     {
       id: 3,
-      title: "Spacious Shared Apartment in Kothrud",
-      price: "₹15,000/month",
-      location: "Kothrud",
+      title: 'Spacious Shared Apartment in Kothrud',
+      price: '₹15,000/month',
+      location: 'Kothrud',
       image: project3Image,
-      amenities: ["Balcony", "Housekeeping", "Laundry"],
-      link: "#"
+      amenities: ['Balcony', 'Housekeeping', 'Laundry'],
+      link: '#',
+    },
+    {
+      id: 4,
+      title: 'Cozy Studio in Viman Nagar',
+      price: '₹22,000/month',
+      location: 'Viman Nagar',
+      image: project4Image,
+      amenities: ['AC', 'Furnished', 'Power Backup'],
+      link: '#',
+    },
+    {
+      id: 5,
+      title: '2BHK in Baner',
+      price: '₹40,000/month',
+      location: 'Baner',
+      image: project5Image,
+      amenities: ['Parking', 'Gym', 'Swimming Pool'],
+      link: '#',
+    },
+    {
+      id: 6,
+      title: '2BHK & Office in Baner',
+      price: '₹60,000/month',
+      location: 'Baner',
+      image: project6Image,
+      amenities: ['Parking', 'Gym', 'Swimming Pool'],
+      link: '#',
+    },
+    {
+      id: 7,
+      title: '1BHK & Office in Baner',
+      price: '₹50,000/month',
+      location: 'Baner',
+      image: project7Image,
+      amenities: ['Parking', 'Gym', 'Swimming Pool'],
+      link: '#',
     },
     {
       id: 8,
-      title: "2BHK in Baner",
-      price: "₹40,000/month",
-      location: "Baner",
+      title: '2BHK in Baner',
+      price: '₹40,000/month',
+      location: 'Baner',
       image: project8Image,
-      amenities: ["Parking", "Gym", "Swimming Pool"],
-      link: "#"
-    }
+      amenities: ['Parking', 'Gym', 'Swimming Pool'],
+      link: '#',
+    },
   ];
 
-  // useEffect to set properties when component mounts (could be fetched from an API)
   useEffect(() => {
-    setProperties(initialProperties);
+    setProperties(sampleProperties);
   }, []);
 
-  const scroll = (direction) => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 200; // Adjust scroll amount as needed
-      scrollContainerRef.current.scrollBy({
+  const scrollHandler = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = 250;
+      scrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   };
 
   return (
-    <section className="bg-white py-4">
-      <div className="container mx-auto px-6">
-        <div className="container mx-auto py-4 pt-20 px-6 md:px-20 lg:px-32 my-2 w-full overflow-hidden" id="Projects">
-          <h1 className="text-2xl sm:text-4xl font-bold mb-2 text-center">
-            Featured 
-            <span className="underline underline-offset-4 decoration-1 under font-light pl-2">
+    <section className="bg-white py-16">
+      <div className="px-6 md:px-20 lg:px-32 max-w-screen-xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold">
+            Featured
+            <span className="text-gray-600 font-light underline underline-offset-4 pl-2">
               Properties
             </span>
-          </h1>
-          <p className="text-center text-gray-500 mb-8 max-w-80 mx-auto">
-            Crafting Spaces, Building legacies - Explore Our Portfolio
+          </h2>
+          <p className="text-gray-500 mt-2 max-w-md mx-auto">
+            Crafting Spaces, Building Legacies - Explore Our Portfolio
           </p>
-
-          {/* Slider Buttons */}
-          <div className="flex justify-end items-center mb-0">
-            <button 
-              onClick={() => scroll('left')} 
-              className="p-3 bg-gray-200 rounded mr-2" 
-              aria-label="Previous Project"
-            >
-              <img src={left_arrow} alt="previous" />
-            </button>
-
-            <button 
-              onClick={() => scroll('right')} 
-              className="p-3 bg-gray-200 rounded mr-2" 
-              aria-label="Next Project"
-            >
-              <img src={right_arrow} alt="next" />
-            </button>
-          </div>
-
         </div>
 
-        {/* Scrollable container with hidden scrollbar */}
-        <div 
-          ref={scrollContainerRef}
-          className="flex overflow-x-auto pb-4 scrollbar-hide justify-center gap-6"
-          style={{ 
-            scrollbarWidth: 'none', // Firefox
-            msOverflowStyle: 'none', // IE/Edge
-            WebkitOverflowScrolling: 'touch' // Smooth scrolling on iOS
+        {/* Scroll buttons */}
+        <div className="flex justify-end mb-4 gap-2">
+          <button
+            onClick={() => scrollHandler('left')}
+            className="p-3 bg-gray-200 rounded hover:bg-gray-300"
+          >
+            <img src={leftArrow} alt="Scroll Left" />
+          </button>
+          <button
+            onClick={() => scrollHandler('right')}
+            className="p-3 bg-gray-200 rounded hover:bg-gray-300"
+          >
+            <img src={rightArrow} alt="Scroll Right" />
+          </button>
+        </div>
+
+        {/* Property cards scrollable container */}
+        <div
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-6 pb-4 scrollbar-hide"
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch',
           }}
         >
-
-          {/* Displaying all properties */}
           {properties.map((property) => (
-            <div 
-              key={property.id} 
-              className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200"
+            <div
+              key={property.id}
+              className="flex-shrink-0 w-64 sm:w-72 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md transition-shadow"
             >
-              <img src={property.image} alt={property.title} className="w-full h-48 object-cover" />
+              <img
+                src={property.image}
+                alt={property.title}
+                className="w-full h-48 object-cover"
+              />
               <div className="p-4">
-                <h3 className="text-lg font-bold text-gray-800 mb-2">{property.title}</h3>
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">
+                  {property.title}
+                </h3>
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-blue-600 font-medium">{property.price}</span>
-                  <span className="bg-[#FF5733] text-white px-3 py-1 rounded-full text-xs flex items-center">
+                  <span className="text-blue-600 font-medium">
+                    {property.price}
+                  </span>
+                  <span className="bg-orange-600 text-white px-3 py-1 rounded-full text-xs">
                     {property.location}
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-3">
-                  {property.amenities.map((amenity, index) => (
-                    <span key={index} className="text-gray-600 bg-gray-100 px-3 py-1 text-xs rounded-full">
-                      {amenity}
+                  {property.amenities.map((item, index) => (
+                    <span
+                      key={index}
+                      className="bg-gray-100 text-gray-600 px-3 py-1 text-xs rounded-full"
+                    >
+                      {item}
                     </span>
                   ))}
                 </div>
-                <a 
-                  href={property.link} 
-                  className="block w-full text-center bg-[#364a75] hover:bg-[#111827] text-white py-2 rounded transition-colors"
+                <a
+                  href={property.link}
+                  className="block text-center bg-[#364a75] hover:bg-[#111827] text-white py-2 rounded transition-colors"
                 >
                   View Details
                 </a>
@@ -184,7 +189,6 @@ const FeaturedProperties = () => {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
