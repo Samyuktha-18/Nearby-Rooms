@@ -18,8 +18,8 @@ const App = () => {
       <CTABanner />
     </div>
       <AboutSection/>
-      <DownloadAppBanner/>
       <Testimonials/>
+      <DownloadAppBanner/>
       <ContactFooter/>
     </div>
   )

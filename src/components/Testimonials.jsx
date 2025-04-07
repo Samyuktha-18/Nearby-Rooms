@@ -2,19 +2,19 @@ import React from 'react';
 
 const testimonials = [
   {
-    name: "Alice Johnson",
-    message: "This platform is amazing! I got results way faster than expected.",
-    avatar: "https://i.pravatar.cc/150?img=1"
+    name: "Rahul Sharma ",
+    message: "Found my perfect 1BHK in Hinjewadi through Nearby Rooms. The verification process gave me confidence in the listing.",
+    avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Avatar123"
   },
   {
-    name: "Mark Smith",
-    message: "Outstanding service and great support team. Highly recommend!",
-    avatar: "https://i.pravatar.cc/150?img=2"
+    name: "Priya Mehta ",
+    message: "Nearby Rooms made my house-hunting process effortless. The filter options helped me find exactly what I was looking for!",
+    avatar: "https://api.dicebear.com/7.x/pixel-art/svg?seed=Samyuktha"
   },
   {
-    name: "Priya Patel",
-    message: "Sleek design and seamless experience. Totally loved it!",
-    avatar: "https://i.pravatar.cc/150?img=3"
+    name: "Amit Verma ",
+    message: "I moved to a new city for work and struggled to find a place. Nearby Rooms helped me secure a rental within days!",
+    avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Avatar123"
   }
 ];
 
