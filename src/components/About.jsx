@@ -1,7 +1,14 @@
+import { motion } from "framer-motion";
+
 const AboutSection = () => {
   return (
     <section className="bg-white py-10 px-4 sm:px-6 md:px-10 lg:px-20 ml-8 mr-8">
-      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
+      <motion.div
+      initial={{opacity: 0, x: -200}}
+      transition={{duration: 2}}
+      whileInView={{opacity: 1, x:0}}
+      viewport={{once: true}}
+       className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
         {/* Left Section */}
         <div className="w-full lg:w-1/2">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black leading-tight">
@@ -35,7 +42,7 @@ const AboutSection = () => {
             <p className="text-sm sm:text-base md:text-lg text-gray-600">Customer Satisfaction</p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

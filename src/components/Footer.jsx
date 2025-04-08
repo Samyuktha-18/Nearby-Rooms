@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import {
   Phone,
   Mail,
@@ -11,9 +12,15 @@ import {
 
 const ContactFooter = () => {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full overflow-hidden">
       {/* Contact CTA Section */}
-      <div className="relative bg-[#fdf2ec] text-black p-6 sm:p-10 lg:p-16 rounded-lg max-w-7xl mx-auto -mb-20 z-10 shadow-xl text-center md:text-left">
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="relative bg-[#fdf2ec] text-black p-6 sm:p-10 lg:p-16 rounded-lg max-w-7xl mx-auto -mb-20 z-10 shadow-xl text-center md:text-left"
+      >
         <h2 className="text-3xl sm:text-4xl font-bold">
           Find your <span className="text-orange-500">dream home</span> today!
         </h2>
@@ -23,10 +30,16 @@ const ContactFooter = () => {
         <button className="mt-6 border border-black px-6 py-3 sm:px-8 text-base sm:text-lg rounded-lg flex items-center gap-2 justify-center mx-auto md:mx-0 hover:bg-black hover:text-white transition">
           Contact Us <span className="text-xl sm:text-2xl">↗</span>
         </button>
-      </div>
+      </motion.div>
 
       {/* Footer Section */}
-      <footer className="bg-black text-white pt-32 pb-12 px-4 sm:px-6 lg:px-12 mt-0 text-base sm:text-lg">
+      <motion.footer
+        initial={{ scale: 0.95, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
+        viewport={{ once: true }}
+        className="bg-black text-white pt-32 pb-12 px-4 sm:px-6 lg:px-12 mt-0 text-base sm:text-lg"
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Company Info */}
           <div>
@@ -97,7 +110,7 @@ const ContactFooter = () => {
         <div className="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
           2025 © Nearby Rooms. All rights reserved.
         </div>
-      </footer>
+      </motion.footer>
     </div>
   );
 };

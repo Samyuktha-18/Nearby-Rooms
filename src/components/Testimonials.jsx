@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -21,7 +22,12 @@ const testimonials = [
 const Testimonials = () => {
   return (
     <section className="py-16 bg-gray-100 px-4 sm:px-6 md:px-10 lg:px-20">
-      <div className="max-w-7xl mx-auto text-center">
+      <motion.div
+      initial={{opacity: 0, x: 200}}
+      transition={{duration: 2}}
+      whileInView={{opacity: 1, x:0}}
+      viewport={{once: true}}
+      className="max-w-7xl mx-auto text-center">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12">
           What Customers Say About Us
         </h2>
@@ -43,7 +49,7 @@ const Testimonials = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

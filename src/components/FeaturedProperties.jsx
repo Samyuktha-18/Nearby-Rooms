@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
-// Importing project images
+// Project images
 import project1Image from '../assets/project1.jpg';
 import project2Image from '../assets/project2.jpg';
 import project3Image from '../assets/project3.jpg';
@@ -14,8 +15,12 @@ import leftArrow from '../assets/left_arrow.svg';
 import rightArrow from '../assets/right_arrow.svg';
 
 const FeaturedProperties = () => {
-  const [properties, setProperties] = useState([]);
   const scrollRef = useRef(null);
+  const [properties, setProperties] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
 
   const sampleProperties = [
     {
@@ -38,7 +43,7 @@ const FeaturedProperties = () => {
     },
     {
       id: 3,
-      title: 'Spacious Shared Apartment in Kothrud',
+      title: 'Shared Apartment in Kothrud',
       price: '₹15,000/month',
       location: 'Kothrud',
       image: project3Image,
@@ -96,20 +101,69 @@ const FeaturedProperties = () => {
     setProperties(sampleProperties);
   }, []);
 
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    const handleScroll = () => {
+      const cardWidth = scrollEl.firstChild?.offsetWidth + 24;
+      const index = Math.round(scrollEl.scrollLeft / (cardWidth * 4));
+      setActiveIndex(index);
+    };
+
+    scrollEl.addEventListener('scroll', handleScroll);
+    return () => scrollEl.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollHandler = (direction) => {
-    if (scrollRef.current) {
-      const scrollAmount = 250;
-      scrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
-      });
-    }
+    const scrollAmount = scrollRef.current.firstChild.offsetWidth * 4 + 24 * 3;
+    scrollRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  };
+
+  const onMouseDown = (e) => {
+    isDragging.current = true;
+    scrollRef.current.classList.add('cursor-grabbing');
+    startX.current = e.pageX - scrollRef.current.offsetLeft;
+    scrollLeft.current = scrollRef.current.scrollLeft;
+  };
+
+  const onMouseUp = () => {
+    isDragging.current = false;
+    scrollRef.current.classList.remove('cursor-grabbing');
+  };
+
+  const onMouseLeave = () => {
+    isDragging.current = false;
+    scrollRef.current.classList.remove('cursor-grabbing');
+  };
+
+  const onMouseMove = (e) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 2;
+    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const goToIndex = (index) => {
+    const cardWidth = scrollRef.current.firstChild.offsetWidth + 24;
+    scrollRef.current.scrollTo({
+      left: index * cardWidth * 4,
+      behavior: 'smooth',
+    });
   };
 
   return (
     <section className="bg-white py-16">
       <div className="px-6 md:px-20 lg:px-32 max-w-screen-xl mx-auto">
-        <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 200 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.5 }}
+          className="text-center mb-12"
+        >
           <h2 className="text-3xl sm:text-4xl font-bold">
             Featured
             <span className="text-gray-600 font-light underline underline-offset-4 pl-2">
@@ -119,52 +173,47 @@ const FeaturedProperties = () => {
           <p className="text-gray-500 mt-2 max-w-md mx-auto">
             Crafting Spaces, Building Legacies - Explore Our Portfolio
           </p>
-        </div>
+        </motion.div>
 
-        {/* Scroll buttons */}
+        {/* Arrows */}
         <div className="flex justify-end mb-4 gap-2">
-          <button
-            onClick={() => scrollHandler('left')}
-            className="p-3 bg-gray-200 rounded hover:bg-gray-300"
-          >
-            <img src={leftArrow} alt="Scroll Left" />
+          <button onClick={() => scrollHandler('left')} className="p-3 bg-gray-200 rounded hover:bg-gray-300">
+            <img src={leftArrow} alt="Left" />
           </button>
-          <button
-            onClick={() => scrollHandler('right')}
-            className="p-3 bg-gray-200 rounded hover:bg-gray-300"
-          >
-            <img src={rightArrow} alt="Scroll Right" />
+          <button onClick={() => scrollHandler('right')} className="p-3 bg-gray-200 rounded hover:bg-gray-300">
+            <img src={rightArrow} alt="Right" />
           </button>
         </div>
 
-        {/* Property cards scrollable container */}
-        <div
+        {/* Cards */}
+        <motion.div
           ref={scrollRef}
-          className="flex overflow-x-auto gap-6 pb-4 scrollbar-hide"
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            WebkitOverflowScrolling: 'touch',
-          }}
-        >
+          onMouseDown={onMouseDown}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseLeave}
+          onMouseMove={onMouseMove}
+          className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 pb-4 cursor-grab select-none scrollbar-hide"
+          initial={{opacity: 0, x: 200}}
+          transition={{duration: 2, delay: 2.5}}
+          whileInView={{opacity: 1, x:0}}
+          viewport={{once: true}}>
           {properties.map((property) => (
-            <div
+            <motion.div
               key={property.id}
-              className="flex-shrink-0 w-64 sm:w-72 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md transition-shadow"
-            >
+              className="snap-start flex-shrink-0 w-64 sm:w-72 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md transition-shadow"
+              initial={{opacity: 0, x: 200}}
+              transition={{duration: 2}}
+              whileInView={{opacity: 1, x:0}}
+              viewport={{once: true}} >
               <img
                 src={property.image}
                 alt={property.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-48 object-cover rounded-t-lg"
               />
               <div className="p-4">
-                <h3 className="text-lg font-semibold mb-2 text-gray-800">
-                  {property.title}
-                </h3>
+                <h3 className="text-lg font-semibold mb-2 text-gray-800">{property.title}</h3>
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-blue-600 font-medium">
-                    {property.price}
-                  </span>
+                  <span className="text-blue-600 font-medium">{property.price}</span>
                   <span className="bg-orange-600 text-white px-3 py-1 rounded-full text-xs">
                     {property.location}
                   </span>
@@ -186,7 +235,20 @@ const FeaturedProperties = () => {
                   View Details
                 </a>
               </div>
-            </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Pagination Dots */}
+        <div className="mt-6 flex justify-center items-center gap-2">
+          {Array.from({ length: Math.ceil(properties.length / 4) }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToIndex(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all ${
+                index === activeIndex ? 'bg-gray-800' : 'bg-gray-300'
+              }`}
+            />
           ))}
         </div>
       </div>

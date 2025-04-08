@@ -1,11 +1,18 @@
 import React from 'react';
 import googlePlay from '../assets/googlePlay.svg';
 import appleIcon from '../assets/appleIcon.png';
+import { motion } from "framer-motion";
+
 
 const DownloadAppBanner = () => {
   return (
     <section className="bg-gray-100 py-10 px-4 sm:px-6 md:px-12 lg:px-20 mb-10">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+      <motion.div
+      initial={{opacity: 0, x: -200}}
+      transition={{duration: 2}}
+      whileInView={{opacity: 1, x:0}}
+      viewport={{once: true}}
+      className="flex flex-col md:flex-row items-center justify-between gap-10">
         {/* Left Image Section */}
         <div className="w-full md:w-1/2">
           <img
@@ -60,7 +67,7 @@ const DownloadAppBanner = () => {
             </a>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

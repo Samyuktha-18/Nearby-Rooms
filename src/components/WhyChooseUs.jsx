@@ -1,4 +1,5 @@
 import { CheckCircle, Shield, MapPin, Star } from "lucide-react";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -25,7 +26,12 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <div className="flex flex-col items-center justify-center container mx-auto px-6 py-10 md:px-12 lg:px-24 w-full overflow-hidden" id="About">
+    <motion.div
+      initial={{opacity: 0, x: 200}}
+      transition={{duration: 2}}
+      whileInView={{opacity: 1, x:0}}
+      viewport={{once: true}}
+    className="flex flex-col items-center justify-center container mx-auto px-6 py-10 md:px-12 lg:px-24 w-full overflow-hidden" id="About">
       <h1 className="text-2xl sm:text-4xl font-bold mb-4 text-center">
         Why 
         <span className="underline underline-offset-4 decoration-2 font-light pl-2">Choose Us</span>
@@ -46,6 +52,6 @@ export default function WhyChooseUs() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

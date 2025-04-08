@@ -44,7 +44,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className='bg-white text-black px-6 py-2 rounded-full'
           >
-            Download
+            Get App
           </a>
           <button className='bg-white px-8 py-2 rounded-full'>
             Sign Up
@@ -93,7 +93,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             className='bg-black text-white px-6 py-2 rounded-full mt-4'
           >
-            Download App
+            Get App
           </a>
           <button className='bg-black text-white px-8 py-2 rounded-full'>
             Sign Up
