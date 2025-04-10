@@ -1,14 +1,35 @@
 import { motion } from "framer-motion";
+import { Building2, Users, CheckCircle2, Smile } from "lucide-react";
+import CountUp from "react-countup";
+import { useEffect, useState } from "react";
+
+const stats = [
+  { icon: <Smile className="w-8 h-8 text-orange-500" />, value: 5000, suffix: "+", label: "Happy Customers" },
+  { icon: <CheckCircle2 className="w-8 h-8 text-orange-500" />, value: 2000, suffix: "+", label: "Verified Properties" },
+  { icon: <Building2 className="w-8 h-8 text-orange-500" />, value: 15, suffix: "+", label: "Pune Locations" },
+  { icon: <Users className="w-8 h-8 text-orange-500" />, value: 98, suffix: "%", label: "Customer Satisfaction" },
+];
 
 const AboutSection = () => {
+  const [counterKey, setCounterKey] = useState(0);
+
+  // Loop the count every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounterKey((prev) => prev + 1);
+    }, 4000); // Every 4 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="bg-white py-10 px-4 sm:px-6 md:px-10 lg:px-20 ml-8 mr-8">
+    <section className="bg-white py-10 px-4 sm:px-6 md:px-10 lg:px-20 mx-8">
       <motion.div
-      initial={{opacity: 0, x: -200}}
-      transition={{duration: 2}}
-      whileInView={{opacity: 1, x:0}}
-      viewport={{once: true}}
-       className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
+        initial={{ opacity: 0, x: -200 }}
+        transition={{ duration: 2 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-10"
+      >
         {/* Left Section */}
         <div className="w-full lg:w-1/2">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black leading-tight">
@@ -25,22 +46,27 @@ const AboutSection = () => {
 
         {/* Right Section */}
         <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-          <div className="bg-orange-100 p-6 sm:p-8 text-center rounded-lg">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">5000+</h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600">Happy Customers</p>
-          </div>
-          <div className="bg-orange-100 p-6 sm:p-8 text-center rounded-lg">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">2000+</h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600">Verified Properties</p>
-          </div>
-          <div className="bg-orange-100 p-6 sm:p-8 text-center rounded-lg">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">15+</h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600">Pune Locations</p>
-          </div>
-          <div className="bg-orange-100 p-6 sm:p-8 text-center rounded-lg">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">98%</h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600">Customer Satisfaction</p>
-          </div>
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.08, y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="bg-white border-2 border-transparent hover:border-orange-400 p-6 sm:p-8 text-center rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
+            >
+              <div className="flex justify-center mb-4">{stat.icon}</div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black">
+                <CountUp
+                  key={counterKey + "-" + index} // force re-animation
+                  end={stat.value}
+                  duration={2}
+                  suffix={stat.suffix}
+                />
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 mt-2">
+                {stat.label}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
     </section>

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Project images
 import project1Image from '../assets/project1.jpg';
 import project2Image from '../assets/project2.jpg';
 import project3Image from '../assets/project3.jpg';
@@ -18,9 +17,7 @@ const FeaturedProperties = () => {
   const scrollRef = useRef(null);
   const [properties, setProperties] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const sampleProperties = [
     {
@@ -121,31 +118,6 @@ const FeaturedProperties = () => {
     });
   };
 
-  const onMouseDown = (e) => {
-    isDragging.current = true;
-    scrollRef.current.classList.add('cursor-grabbing');
-    startX.current = e.pageX - scrollRef.current.offsetLeft;
-    scrollLeft.current = scrollRef.current.scrollLeft;
-  };
-
-  const onMouseUp = () => {
-    isDragging.current = false;
-    scrollRef.current.classList.remove('cursor-grabbing');
-  };
-
-  const onMouseLeave = () => {
-    isDragging.current = false;
-    scrollRef.current.classList.remove('cursor-grabbing');
-  };
-
-  const onMouseMove = (e) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX.current) * 2;
-    scrollRef.current.scrollLeft = scrollLeft.current - walk;
-  };
-
   const goToIndex = (index) => {
     const cardWidth = scrollRef.current.firstChild.offsetWidth + 24;
     scrollRef.current.scrollTo({
@@ -154,15 +126,30 @@ const FeaturedProperties = () => {
     });
   };
 
+  // 🔁 Automatic slideshow
+  useEffect(() => {
+    if (isHovered) return;
+
+    const autoplay = setInterval(() => {
+      setActiveIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % Math.ceil(properties.length / 4);
+        goToIndex(nextIndex);
+        return nextIndex;
+      });
+    }, 5000);
+
+    return () => clearInterval(autoplay);
+  }, [isHovered, properties]);
+
   return (
-    <section className="bg-white py-16">
-      <div className="px-6 md:px-20 lg:px-32 max-w-screen-xl mx-auto">
+    <section className="bg-white py-10">
+      <div className="px-6 md:px-15 lg:px-32 max-w-screen-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 200 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.5 }}
-          className="text-center mb-12"
+          className="text-center mb-5"
         >
           <h2 className="text-3xl sm:text-4xl font-bold">
             Featured
@@ -188,23 +175,25 @@ const FeaturedProperties = () => {
         {/* Cards */}
         <motion.div
           ref={scrollRef}
-          onMouseDown={onMouseDown}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
-          onMouseMove={onMouseMove}
-          className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 pb-4 cursor-grab select-none scrollbar-hide"
-          initial={{opacity: 0, x: 200}}
-          transition={{duration: 2, delay: 2.5}}
-          whileInView={{opacity: 1, x:0}}
-          viewport={{once: true}}>
-          {properties.map((property) => (
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 cursor-grab select-none scrollbar-hide"
+          initial={{ opacity: 0, x: 200 }}
+          transition={{ duration: 2, delay: 2.5 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
+          {properties.map((property, idx) => (
             <motion.div
               key={property.id}
-              className="snap-start flex-shrink-0 w-64 sm:w-72 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md transition-shadow"
-              initial={{opacity: 0, x: 200}}
-              transition={{duration: 2}}
-              whileInView={{opacity: 1, x:0}}
-              viewport={{once: true}} >
+              className={`snap-start flex-shrink-0 w-64 sm:w-72 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md transition-shadow ${
+                idx !== properties.length - 1 ? 'mr-6' : ''
+              }`}
+              initial={{ opacity: 0, x: 200 }}
+              transition={{ duration: 2 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
               <img
                 src={property.image}
                 alt={property.title}

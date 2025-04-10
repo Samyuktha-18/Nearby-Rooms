@@ -7,7 +7,7 @@ const CTABanner = () => {
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.8, ease: "easeIn" }}
       className="relative bg-[#111827] py-16 px-4 sm:px-6 lg:px-8 flex justify-center items-center"
     >
       <motion.div

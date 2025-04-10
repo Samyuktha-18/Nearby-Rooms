@@ -1,26 +1,14 @@
 import React from 'react'
-import Header from './components/Header'
-import WhyChooseUs from './components/WhyChooseUs'
-import FeaturedProperties from './components/FeaturedProperties'
-import CTABanner from './components/PropertiesBanner'
-import AboutSection from './components/About'
-import ContactFooter from './components/Footer'
-import DownloadAppBanner from './components/DownloadApp'
-import Testimonials from './components/Testimonials'
+import Navbar from './components/Navbar'
+import Home from './components/Home'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
-    <div className='w-full overflow-hidden'>
-      <Header/>
-      <WhyChooseUs/>
-      <div className="relative">
-      <FeaturedProperties />
-      <CTABanner />
-    </div>
-      <AboutSection/>
-      <Testimonials/>
-      <DownloadAppBanner/>
-      <ContactFooter/>
+    <div>
+      <Navbar/>
+      <Home/>
+   <Footer/>
     </div>
   )
 }

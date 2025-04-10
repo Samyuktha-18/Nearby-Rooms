@@ -10,7 +10,7 @@ import {
   Linkedin,
 } from "lucide-react";
 
-const ContactFooter = () => {
+const Footer = () => {
   return (
     <div className="relative w-full overflow-hidden">
       {/* Contact CTA Section */}
@@ -19,16 +19,17 @@ const ContactFooter = () => {
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
         viewport={{ once: true }}
-        className="relative bg-[#fdf2ec] text-black p-6 sm:p-10 lg:p-16 rounded-lg max-w-7xl mx-auto -mb-20 z-10 shadow-xl text-center md:text-left"
+        className="relative bg-gradient-to-r from-orange-100 to-orange-100 text-black p-6 sm:p-10 lg:p-16 rounded-2xl max-w-7xl mx-auto -mb-20 z-10 shadow-2xl text-center md:text-left"
       >
-        <h2 className="text-3xl sm:text-4xl font-bold">
+        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
           Find your <span className="text-orange-500">dream home</span> today!
         </h2>
-        <p className="mt-4 text-base sm:text-lg lg:text-xl">
-          Discover the perfect property tailored to your needs and preferences with our expert guidance.
+        <p className="mt-4 text-lg sm:text-xl max-w-3xl">
+          Discover the perfect property tailored to your lifestyle with our expert guidance and personalized recommendations.
         </p>
-        <button className="mt-6 border border-black px-6 py-3 sm:px-8 text-base sm:text-lg rounded-lg flex items-center gap-2 justify-center mx-auto md:mx-0 hover:bg-black hover:text-white transition">
-          Contact Us <span className="text-xl sm:text-2xl">↗</span>
+        <button className="mt-6 border border-black px-8 py-3 text-lg font-medium rounded-full flex items-center gap-2 justify-center mx-auto md:mx-0 hover:bg-black hover:text-white transition-all duration-300 group">
+          Contact Us{" "}
+          <span className="text-2xl group-hover:translate-x-1 transition-transform">↗</span>
         </button>
       </motion.div>
 
@@ -38,22 +39,22 @@ const ContactFooter = () => {
         whileInView={{ scale: 1, opacity: 1 }}
         transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
         viewport={{ once: true }}
-        className="bg-black text-white pt-32 pb-12 px-4 sm:px-6 lg:px-12 mt-0 text-base sm:text-lg"
+        className="bg-black text-white pt-40 pb-14 px-6 lg:px-12 mt-0 text-base sm:text-lg"
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Company Info */}
           <div>
-            <h3 className="text-2xl sm:text-3xl font-bold">Nearby Rooms</h3>
-            <p className="mt-4">
-              We are your personal real estate navigator, and your trusted partner in finding quality rental accommodations.
+            <h3 className="text-3xl sm:text-4xl font-bold mb-4">Nearby Rooms</h3>
+            <p>
+              Your personal real estate navigator and trusted partner in discovering quality rental accommodations.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="p-3 w-full sm:w-64 bg-gray-800 border border-gray-700 text-white rounded-t-md sm:rounded-l-md sm:rounded-tr-none focus:outline-none"
+                className="p-3 w-full sm:w-64 bg-gray-800 border border-gray-700 text-white rounded-t-md sm:rounded-l-md sm:rounded-tr-none focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
-              <button className="p-3 bg-orange-500 text-white rounded-b-md sm:rounded-r-md sm:rounded-bl-none w-full sm:w-auto">
+              <button className="p-3 bg-orange-500 text-white font-semibold rounded-b-md sm:rounded-r-md sm:rounded-bl-none w-full sm:w-auto hover:bg-orange-600 transition">
                 Subscribe
               </button>
             </div>
@@ -61,11 +62,14 @@ const ContactFooter = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xl sm:text-2xl font-semibold text-orange-500">Links</h4>
-            <ul className="mt-4 space-y-3">
+            <h4 className="text-2xl font-semibold text-orange-500 mb-4">Quick Links</h4>
+            <ul className="space-y-3">
               {["Home", "About", "Projects", "Testimonials", "Contact"].map((item) => (
                 <li key={item}>
-                  <a href={`#${item}`} className="hover:text-gray-400">
+                  <a
+                    href={`#${item.toLowerCase()}`}
+                    className="hover:text-orange-400 transition duration-200"
+                  >
                     {item}
                   </a>
                 </li>
@@ -75,8 +79,8 @@ const ContactFooter = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-xl sm:text-2xl font-semibold">Contact</h4>
-            <div className="mt-4 space-y-3">
+            <h4 className="text-2xl font-semibold mb-4">Get in Touch</h4>
+            <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Phone size={20} /> <p>+91 9960276026</p>
               </div>
@@ -89,25 +93,31 @@ const ContactFooter = () => {
             </div>
 
             {/* Social Icons */}
-            <div className="mt-6 flex flex-wrap gap-4">
-              <a href="https://x.com/nearbyrooms" target="_blank" rel="noopener noreferrer">
-                <Twitter className="p-2 bg-gray-700 rounded-full" size={40} />
-              </a>
-              <a href="https://www.facebook.com/people/Nearby-Rooms/61550898845863" target="_blank" rel="noopener noreferrer">
-                <Facebook className="p-2 bg-gray-700 rounded-full" size={40} />
-              </a>
-              <a href="https://www.instagram.com/nearbyrooms" target="_blank" rel="noopener noreferrer">
-                <Instagram className="p-2 bg-gray-700 rounded-full" size={40} />
-              </a>
-              <a href="https://www.linkedin.com/company/nearbyrooms/" target="_blank" rel="noopener noreferrer">
-                <Linkedin className="p-2 bg-gray-700 rounded-full" size={40} />
-              </a>
+            <div className="mt-6 flex gap-4">
+              {[
+                { icon: <Twitter />, link: "https://x.com/nearbyrooms" },
+                { icon: <Facebook />, link: "https://www.facebook.com/people/Nearby-Rooms/61550898845863" },
+                { icon: <Instagram />, link: "https://www.instagram.com/nearbyrooms" },
+                { icon: <Linkedin />, link: "https://www.linkedin.com/company/nearbyrooms/" },
+              ].map(({ icon, link }, i) => (
+                <motion.a
+                  key={i}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-gray-700 hover:bg-orange-500 text-white p-2 rounded-full transition-all"
+                >
+                  {React.cloneElement(icon, { size: 32 })}
+                </motion.a>
+              ))}
             </div>
           </div>
         </div>
 
         {/* Footer Bottom Line */}
-        <div className="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
+        <div className="border-t border-gray-700 mt-12 pt-6 text-center text-gray-500 text-sm">
           2025 © Nearby Rooms. All rights reserved.
         </div>
       </motion.footer>
@@ -115,4 +125,4 @@ const ContactFooter = () => {
   );
 };
 
-export default ContactFooter;
+export default Footer;
